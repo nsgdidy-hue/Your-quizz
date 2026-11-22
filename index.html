@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10172a">
+<title>Your Quiz — Learn • Play • Win</title>
+<style>
+:root{--bg:#0b1020;--panel:#131c32;--panel2:#1a2742;--text:#f4f7ff;--muted:#a9b5ce;--accent:#8b7cff;--accent2:#35d6b0;--danger:#ff6b83;--line:#293754;--shadow:0 18px 50px #0005}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#27345b 0,transparent 34%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:11px 16px;font-weight:700;color:white;background:linear-gradient(135deg,var(--accent),#6254df);box-shadow:0 8px 22px #6556e533}button:hover{filter:brightness(1.1);transform:translateY(-1px)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.secondary{background:var(--panel2);box-shadow:none;border:1px solid var(--line)}.ghost{background:transparent;border:1px solid var(--line);box-shadow:none}.danger{background:#6f263d}.success{background:#147b69}
+header{position:sticky;top:0;z-index:5;background:#0b1020dd;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{max-width:1120px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px}.logo{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#8b7cff,#35d6b0);font-size:20px}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:1px}
+.navright{display:flex;align-items:center;gap:8px}.nav select{max-width:155px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px}
+main{max-width:1120px;margin:32px auto;padding:0 20px 60px}.hero{padding:36px;border:1px solid #ffffff18;border-radius:28px;background:linear-gradient(120deg,#1c2850ee,#182b3bee);box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"✦";position:absolute;right:7%;top:4%;font-size:150px;color:#ffffff0c}.eyebrow{color:var(--accent2);font-weight:800;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:10px 0}.hero p{color:var(--muted);max-width:590px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat,.card,.quizbox{background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:18px}.stat strong{display:block;font-size:25px}.stat span,.muted{color:var(--muted);font-size:13px}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 14px}.sectionhead h2{margin:0;font-size:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.category{min-height:115px;text-align:left;background:var(--panel);border:1px solid var(--line);box-shadow:none;padding:18px}.category .emoji{font-size:27px;display:block;margin-bottom:8px}.category small{display:block;color:var(--muted);font-weight:500}
+.controls{display:flex;gap:9px;flex-wrap:wrap}.controls select,.controls input,.field{background:#0d1528;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:10px}
+.hidden{display:none!important}.quizbox{max-width:760px;margin:20px auto;padding:24px}.quiztop{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px}.bar{height:8px;background:#263451;border-radius:9px;margin:14px 0 22px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}
+.question{font-size:clamp(20px,3vw,27px);font-weight:800;margin:20px 0}.answers{display:grid;gap:10px}.answer{background:#182541;border:1px solid #344565;text-align:left;box-shadow:none;padding:14px}.answer.selected{border-color:var(--accent);background:#29294f}.answer.correct{border-color:var(--accent2);background:#123c3a}.answer.wrong{border-color:var(--danger);background:#492437}.quizfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.result{text-align:center;padding:20px}.score{font-size:54px;font-weight:900;color:var(--accent2)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formgrid>*{width:100%}textarea.field{min-height:85px;resize:vertical}
+footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid var(--line);font-size:13px}
+.notice{background:#382f1b;border:1px solid #74602b;color:#f8dda0;border-radius:12px;padding:12px;font-size:13px;margin-top:14px}
+.light{--bg:#f2f5fc;--panel:#fff;--panel2:#edf1fa;--text:#17213a;--muted:#5d6982;--line:#dce3f0;--shadow:0 18px 50px #25365b18;background:radial-gradient(circle at 15% 0%,#dce4ff 0,transparent 34%),var(--bg)}
+.light header{background:#f5f7fbe8}.light .hero{background:linear-gradient(120deg,#e3e8ff,#dff8f2);color:#17213a}.light .hero p{color:#5d6982}.light .controls select,.light .controls input,.light .field{background:#fff;color:#17213a}.light .answer{background:#f4f6fc;color:#17213a;border-color:#dce3f0}.light .answer.selected{background:#e8e6ff}.light .answer.correct{background:#dcf8ef}.light .answer.wrong{background:#ffe6ec}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(3,1fr)}.hero{padding:25px}.nav{padding:11px 14px}.brand small{display:none}.navright .label{display:none}}
+@media(max-width:480px){main{padding:0 13px 40px;margin-top:18px}.grid{grid-template-columns:1fr 1fr;gap:9px}.category{padding:13px;min-height:105px}.stats{gap:7px}.stat{padding:12px}.stat strong{font-size:20px}.navright{gap:5px}.nav select{max-width:118px}.quizbox{padding:16px}.formgrid{grid-template-columns:1fr}}
+</style>
+  <meta name="monetag" content="9521ce2394fc1872c2e5ebd86487a221">
+</head>
+<body>
+<header><div class="nav">
+  <div class="brand"><div class="logo">✦</div><div>YOUR QUIZ<small>LEARN • PLAY • WIN</small></div></div>
+  <div class="navright">
+    <select id="language" aria-label="Choose language">
+      <option value="en">🌐 English</option><option value="ml">മലയാളം</option><option value="hi">हिन्दी</option><option value="ta">தமிழ்</option><option value="te">తెలుగు</option><option value="kn">ಕನ್ನಡ</option><option value="bn">বাংলা</option><option value="mr">मराठी</option><option value="gu">ગુજરાતી</option><option value="pa">ਪੰਜਾਬੀ</option><option value="ur">اردو</option><option value="ar">العربية</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="ru">Русский</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ko">한국어</option>
+    </select>
+    <button class="ghost" id="themeBtn" title="Toggle theme">☼</button>
+  </div>
+</div></header>
+<main>
+<section id="home">
+  <div class="hero">
+    <div class="eyebrow">THE WORLD IS YOUR CLASSROOM</div>
+    <h1>Challenge your<br><span style="color:var(--accent2)">knowledge.</span></h1>
+    <p>Play quick quizzes, discover new topics and beat your best score. Choose a category or let us surprise you.</p>
+    <div class="actions"><button id="surpriseBtn">🎲 Surprise me</button><button class="secondary" id="dailyBtn">🔥 Daily challenge</button><button class="ghost" id="showAdminBtn">＋ Add questions</button></div>
+    <div class="notice">Standalone single-file edition: questions and scores are saved only in this browser. A shared global leaderboard, online accounts and cross-device question database need a backend.</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong id="statQuestions">0</strong><span>Available questions</span></div>
+    <div class="stat"><strong id="statPlayed">0</strong><span>Quizzes played</span></div>
+    <div class="stat"><strong id="statBest">0%</strong><span>Best accuracy</span></div>
+  </div>
+  <div class="sectionhead"><h2>Explore categories</h2><span class="muted">Pick your next challenge</span></div>
+  <div class="grid" id="categories"></div>
+  <div class="sectionhead"><h2>Quick quiz setup</h2></div>
+  <div class="card">
+    <div class="controls">
+      <select id="count"><option value="5">5 questions</option><option value="10" selected>10 questions</option><option value="20">20 questions</option><option value="50">50 questions</option><option value="100">100 questions</option><option value="all">Unlimited (all available)</option></select>
+      <select id="difficulty"><option value="all">All levels</option><option value="Easy">Easy</option><option value="Medium">Medium</option><option value="Hard">Hard</option></select>
+      <select id="mode"><option value="practice">Practice mode</option><option value="timed">Timed mode · 15 sec/question</option></select>
+      <button id="startAll">Start random quiz →</button>
+    </div>
+  </div>
+  <div class="sectionhead"><h2>Local leaderboard</h2><span class="muted">This device only</span></div>
+  <div class="card" id="leaderboard"></div>
+</section>
+<section id="quiz" class="hidden">
+  <div class="quizbox">
+    <div class="quiztop"><span id="qCounter">Question 1</span><span id="timer">Practice mode</span></div>
+    <div class="bar"><i id="progress"></i></div>
+    <div class="muted" id="qCategory">General Knowledge</div>
+    <div class="question" id="qText"></div>
+    <div class="answers" id="answers"></div>
+    <div class="muted" id="feedback" style="margin-top:14px"></div>
+    <div class="quizfoot"><button class="ghost" id="quitBtn">✕ Exit</button><button id="nextBtn" disabled>Next question →</button></div>
+  </div>
+</section>
+<section id="results" class="hidden">
+  <div class="quizbox result">
+    <div class="eyebrow">QUIZ COMPLETED</div><h2 id="resultTitle">Great effort!</h2>
+    <div class="score" id="resultScore">0/0</div><p id="resultDetail" class="muted"></p>
+    <div class="actions" style="justify-content:center"><button id="retryBtn">↻ Play again</button><button class="secondary" id="homeBtn">Back home</button><button class="ghost" id="shareBtn">Share result</button></div>
+    <div class="sectionhead"><h2>Answer review</h2></div><div id="review" style="text-align:left"></div>
+  </div>
+</section>
+<section id="admin" class="hidden">
+  <div class="card">
+    <div class="sectionhead"><h2>Add a question</h2><button class="ghost" id="closeAdmin">Close</button></div>
+    <p class="muted">Questions you add are saved in this browser only. This is a local content tool, not a secure public admin panel.</p>
+    <div class="formgrid">
+      <input class="field" id="newCategory" placeholder="Category (e.g. Science)">
+      <select class="field" id="newDifficulty"><option>Easy</option><option selected>Medium</option><option>Hard</option></select>
+      <input class="field" id="newQuestion" placeholder="Question text">
+      <input class="field" id="newAnswer" placeholder="Correct answer">
+      <input class="field" id="opt2" placeholder="Wrong option 2">
+      <input class="field" id="opt3" placeholder="Wrong option 3">
+      <input class="field" id="opt4" placeholder="Wrong option 4">
+      <input class="field" id="newExplanation" placeholder="Explanation (optional)">
+    </div>
+    <div class="actions"><button id="saveQuestion">Save question</button><button class="secondary" id="exportBtn">Export questions JSON</button><label class="secondary" style="padding:11px 14px;border-radius:13px;cursor:pointer">Import JSON <input type="file" id="importFile" accept=".json,application/json" hidden></label></div>
+    <p id="adminMsg" class="muted"></p>
+  </div>
+</section>
+</main>
+<footer>YOUR QUIZ · Learn • Play • Win · Single HTML edition</footer>
+<script>
+const LANGS=['en','ml','hi','ta','te','kn','bn','mr','gu','pa','ur','ar','fr','es','de','pt','ru','zh','ja','ko'];
+const categories=[['🌍','General Knowledge'],['🔬','Science'],['➗','Mathematics'],['🏛️','History'],['🗺️','Geography'],['💻','Computer'],['⚽','Sports'],['📚','Literature'],['🧠','Logical Reasoning']];
+const seed=[
+{c:'General Knowledge',d:'Easy',q:'What is the capital of Japan?',o:['Tokyo','Kyoto','Osaka','Nagoya'],a:0,e:'Tokyo is the capital city of Japan.'},
+{c:'General Knowledge',d:'Easy',q:'How many days are there in a leap year?',o:['365','366','364','360'],a:1,e:'A leap year has 366 days.'},
+{c:'Science',d:'Easy',q:'Which planet is known as the Red Planet?',o:['Venus','Jupiter','Mars','Mercury'],a:2,e:'Iron oxide on its surface gives Mars a reddish appearance.'},
+{c:'Science',d:'Easy',q:'What gas do plants absorb from the atmosphere?',o:['Oxygen','Carbon dioxide','Nitrogen','Hydrogen'],a:1,e:'Plants use carbon dioxide during photosynthesis.'},
+{c:'Mathematics',d:'Easy',q:'What is 12 × 8?',o:['88','92','96','108'],a:2,e:'12 multiplied by 8 equals 96.'},
+{c:'Mathematics',d:'Medium',q:'What is the square root of 169?',o:['11','12','13','14'],a:2,e:'13 × 13 = 169.'},
+{c:'History',d:'Easy',q:'In which year did India become independent?',o:['1945','1947','1950','1952'],a:1,e:'India became independent on 15 August 1947.'},
+{c:'Geography',d:'Easy',q:'Which is the largest ocean on Earth?',o:['Atlantic','Indian','Arctic','Pacific'],a:3,e:'The Pacific Ocean is the largest and deepest ocean.'},
+{c:'Computer',d:'Easy',q:'What does CPU stand for?',o:['Central Processing Unit','Computer Personal Unit','Core Program Utility','Central Power User'],a:0,e:'CPU stands for Central Processing Unit.'},
+{c:'Sports',d:'Easy',q:'How many players from one team are on the field in football (soccer)?',o:['9','10','11','12'],a:2,e:'A standard football team has 11 players on the field.'},
+{c:'Science',d:'Medium',q:'What is the chemical symbol for gold?',o:['Ag','Au','Gd','Go'],a:1,e:'Au comes from the Latin word aurum.'},
+{c:'Geography',d:'Medium',q:'Which country has the largest land area?',o:['Canada','China','United States','Russia'],a:3,e:'Russia is the largest country by land area.'},
+{c:'Literature',d:'Easy',q:'Who wrote the play Romeo and Juliet?',o:['Charles Dickens','William Shakespeare','Jane Austen','Mark Twain'],a:1,e:'Romeo and Juliet is a tragedy by William Shakespeare.'},
+{c:'Logical Reasoning',d:'Easy',q:'What number comes next: 2, 4, 8, 16, ...?',o:['18','24','30','32'],a:3,e:'Each number is multiplied by 2.'},
+{c:'Science',d:'Hard',q:'Which part of a cell contains most of its genetic material?',o:['Ribosome','Nucleus','Cell membrane','Cytoplasm'],a:1,e:'In eukaryotic cells, most DNA is located in the nucleus.'},
+{c:'Mathematics',d:'Medium',q:'What is 15% of 200?',o:['15','20','30','35'],a:2,e:'0.15 × 200 = 30.'},
+{c:'General Knowledge',d:'Medium',q:'Which instrument is used to measure atmospheric pressure?',o:['Thermometer','Barometer','Hygrometer','Anemometer'],a:1,e:'A barometer measures atmospheric pressure.'},
+{c:'History',d:'Medium',q:'The ancient Olympic Games originated in which country?',o:['Italy','Egypt','Greece','Turkey'],a:2,e:'The ancient Olympic Games began in Olympia, Greece.'},
+{c:'Computer',d:'Medium',q:'Which language is primarily used to structure web pages?',o:['HTML','SQL','Python','C++'],a:0,e:'HTML provides the structure and content of web pages.'},
+{c:'Sports',d:'Medium',q:'In tennis, what is the term for a score of zero?',o:['Nil','Love','Duck','Blank'],a:1,e:'In tennis scoring, zero is called love.'}
+];
+const mlQ={
+'What is the capital of Japan?':'ജപ്പാന്റെ തലസ്ഥാനം ഏതാണ്?',
+'How many days are there in a leap year?':'അധിവർഷത്തിൽ എത്ര ദിവസങ്ങളുണ്ട്?',
+'Which planet is known as the Red Planet?':'ചുവന്ന ഗ്രഹം എന്നറിയപ്പെടുന്നത് ഏത്?',
+'What gas do plants absorb from the atmosphere?':'സസ്യങ്ങൾ അന്തരീക്ഷത്തിൽ നിന്ന് ആഗിരണം ചെയ്യുന്ന വാതകം ഏത്?',
+'What is 12 × 8?':'12 × 8 എത്രയാണ്?',
+'What is the square root of 169?':'169-ന്റെ വർഗമൂലം എത്ര?',
+'In which year did India become independent?':'ഇന്ത്യയ്ക്ക് സ്വാതന്ത്ര്യം ലഭിച്ച വർഷം ഏത്?',
+'Which is the largest ocean on Earth?':'ഭൂമിയിലെ ഏറ്റവും വലിയ സമുദ്രം ഏത്?',
+'What does CPU stand for?':'CPU എന്നതിന്റെ പൂർണ്ണരൂപം എന്ത്?',
+'How many players from one team are on the field in football (soccer)?':'ഫുട്ബോളിൽ ഒരു ടീമിൽ നിന്ന് എത്ര കളിക്കാർ മൈതാനത്തുണ്ടാകും?'
+};
+let questions=JSON.parse(localStorage.getItem('yq_questions')||'null')||seed;
+let history=JSON.parse(localStorage.getItem('yq_history')||'[]');
+let lang=localStorage.getItem('yq_lang')||'en', current=[],idx=0,chosen=null,score=0,seconds=15,tick=null,lastConfig={category:'all',count:10,difficulty:'all',mode:'practice'};
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem('yq_questions',JSON.stringify(questions));localStorage.setItem('yq_history',JSON.stringify(history))}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function show(id){['home','quiz','results','admin'].forEach(x=>$(x).classList.toggle('hidden',x!==id));window.scrollTo({top:0,behavior:'smooth'})}
+function renderHome(){
+ $('statQuestions').textContent=questions.length;$('statPlayed').textContent=history.length;
+ $('statBest').textContent=(history.length?Math.max(...history.map(x=>x.pct)):0)+'%';
+ $('categories').innerHTML=categories.map(([em,c])=>`<button class="category" data-cat="${c}"><span class="emoji">${em}</span><b>${c}</b><small>${questions.filter(q=>q.c===c).length} questions</small></button>`).join('');
+ document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>start({category:b.dataset.cat}));
+ $('leaderboard').innerHTML=history.length?history.slice().sort((a,b)=>b.pct-a.pct).slice(0,5).map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>${['🥇','🥈','🥉','4.','5.'][i]} ${escapeHtml(x.date)}</span><b>${x.score}/${x.total} · ${x.pct}%</b></div>`).join(''):'<span class="muted">No attempts yet. Play a quiz to see your results here.</span>';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function start(cfg={}){
+ lastConfig={category:cfg.category||'all',count:cfg.count||$('count').value,difficulty:cfg.difficulty||$('difficulty').value,mode:cfg.mode||$('mode').value};
+ let pool=questions.filter(q=>(lastConfig.category==='all'||q.c===lastConfig.category)&&(lastConfig.difficulty==='all'||q.d===lastConfig.difficulty));
+ current=shuffle(pool).slice(0,lastConfig.count==='all'?pool.length:Number(lastConfig.count));
+ if(!current.length){alert('No questions available for this selection yet. Try another category or difficulty.');return}
+ idx=0;score=0;show('quiz');renderQuestion();
+}
+function renderQuestion(){
+ chosen=null;let q=current[idx];$('qCounter').textContent=`Question ${idx+1} of ${current.length}`;$('qCategory').textContent=q.c+' · '+q.d;
+ $('qText').textContent=(lang==='ml'&&mlQ[q.q])?mlQ[q.q]:q.q;
+ $('progress').style.width=((idx)/current.length*100)+'%';$('feedback').textContent='';$('nextBtn').disabled=true;$('nextBtn').textContent=idx===current.length-1?'See results':'Next question →';
+ $('answers').innerHTML=q.o.map((o,i)=>`<button class="answer" data-answer="${i}">${String.fromCharCode(65+i)}. ${escapeHtml(o)}</button>`).join('');
+ document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>selectAnswer(Number(b.dataset.answer)));
+ clearInterval(tick);
+ if(lastConfig.mode==='timed'){seconds=15;$('timer').textContent='⏱ '+seconds+'s';tick=setInterval(()=>{seconds--;$('timer').textContent='⏱ '+seconds+'s';if(seconds<=0){clearInterval(tick);if(chosen===null)selectAnswer(-1)}},1000)}else $('timer').textContent='Practice mode';
+}
+function selectAnswer(n){
+ if(chosen!==null)return;chosen=n;clearInterval(tick);let q=current[idx];let buttons=[...document.querySelectorAll('[data-answer]')];
+ buttons.forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add('correct');else if(i===n)b.classList.add('wrong')});
+ if(n===q.a)score++;
+ $('feedback').textContent=(n===q.a?'✓ Correct. ':'✕ Not quite. ')+(q.e||'Correct answer: '+q.o[q.a]);
+ $('nextBtn').disabled=false;
+}
+function finish(){
+ clearInterval(tick);let pct=Math.round(score/current.length*100),date=new Date().toLocaleString();
+ history.push({score,total:current.length,pct,date});save();$('resultScore').textContent=score+'/'+current.length;
+ $('resultTitle').textContent=pct>=80?'Excellent work!':pct>=50?'Good effort!':'Keep practising!';
+ $('resultDetail').textContent=`Accuracy: ${pct}% · ${score} correct out of ${current.length}.`;
+ $('review').innerHTML=current.map((q,i)=>`<div style="padding:12px 0;border-bottom:1px solid var(--line)"><b>${i+1}. ${escapeHtml(q.q)}</b><div class="muted">Correct answer: ${escapeHtml(q.o[q.a])}</div></div>`).join('');
+ show('results');renderHome();
+}
+$('nextBtn').onclick=()=>{if(chosen===null)return;if(idx<current.length-1){idx++;renderQuestion()}else finish()};
+$('quitBtn').onclick=()=>{if(confirm('Exit this quiz? Your current attempt will not be saved.')){clearInterval(tick);show('home')}};
+$('startAll').onclick=()=>start();$('surpriseBtn').onclick=()=>start({category:'all',count:'10',difficulty:'all',mode:'practice'});
+$('dailyBtn').onclick=()=>start({category:'all',count:'5',difficulty:'all',mode:'timed'});
+$('retryBtn').onclick=()=>start(lastConfig);$('homeBtn').onclick=()=>show('home');
+$('shareBtn').onclick=async()=>{let t=`I scored ${score}/${current.length} on Your Quiz!`;try{if(navigator.share)await navigator.share({title:'Your Quiz result',text:t});else{await navigator.clipboard.writeText(t);alert('Result copied!')}}catch(e){}};
+$('showAdminBtn').onclick=()=>show('admin');$('closeAdmin').onclick=()=>show('home');
+$('saveQuestion').onclick=()=>{
+ let c=$('newCategory').value.trim(),q=$('newQuestion').value.trim(),opts=[$('newAnswer').value.trim(),$('opt2').value.trim(),$('opt3').value.trim(),$('opt4').value.trim()];
+ if(!c||!q||opts.some(x=>!x)){ $('adminMsg').textContent='Please fill in category, question and all four options.';return}
+ let a=opts.shift();questions.push({c,d:$('newDifficulty').value,q,o:[a,...opts],a:0,e:$('newExplanation').value.trim()});
+ // Keep the correct answer at index 0 in storage; it will be randomized visually by shuffling answer objects in a future version.
+ save();$('adminMsg').textContent='Question saved on this device. Note: correct answer is stored as the first option.';['newCategory','newQuestion','newAnswer','opt2','opt3','opt4','newExplanation'].forEach(id=>$(id).value='');renderHome();
+};
+$('exportBtn').onclick=()=>download('your-quiz-questions.json',JSON.stringify(questions,null,2));
+$('importFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let data=JSON.parse(await f.text());if(!Array.isArray(data))throw Error();questions=questions.concat(data);save();renderHome();$('adminMsg').textContent=`Imported ${data.length} questions.`}catch(err){$('adminMsg').textContent='Invalid JSON file.'}};
+function download(name,data){let a=document.createElement('a'),url=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+$('themeBtn').onclick=()=>{document.body.classList.toggle('light');localStorage.setItem('yq_light',document.body.classList.contains('light'))};
+if(localStorage.getItem('yq_light')==='true')document.body.classList.add('light');
+$('language').value=lang;$('language').onchange=e=>{lang=e.target.value;localStorage.setItem('yq_lang',lang);document.documentElement.lang=lang;document.documentElement.dir=['ar','ur'].includes(lang)?'rtl':'ltr';};
+renderHome();
+</script>
+</body>
+</html>
