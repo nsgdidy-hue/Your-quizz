@@ -4,33 +4,81 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#10172a">
+<meta name="monetag" content="1dec5b4c2793316c3343a8d9550c75f1">
 <title>Your Quiz — Learn • Play • Win</title>
 <style>
 :root{--bg:#0b1020;--panel:#131c32;--panel2:#1a2742;--text:#f4f7ff;--muted:#a9b5ce;--accent:#8b7cff;--accent2:#35d6b0;--danger:#ff6b83;--line:#293754;--shadow:0 18px 50px #0005}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#27345b 0,transparent 34%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
-button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:11px 16px;font-weight:700;color:white;background:linear-gradient(135deg,var(--accent),#6254df);box-shadow:0 8px 22px #6556e533}button:hover{filter:brightness(1.1);transform:translateY(-1px)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.secondary{background:var(--panel2);box-shadow:none;border:1px solid var(--line)}.ghost{background:transparent;border:1px solid var(--line);box-shadow:none}.danger{background:#6f263d}.success{background:#147b69}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 15% 0%,#27345b 0,transparent 34%),var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:13px;padding:11px 16px;font-weight:700;color:white;background:linear-gradient(135deg,var(--accent),#6254df);box-shadow:0 8px 22px #6556e533}
+button:hover{filter:brightness(1.1);transform:translateY(-1px)}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.secondary{background:var(--panel2);box-shadow:none;border:1px solid var(--line)}
+.ghost{background:transparent;border:1px solid var(--line);box-shadow:none}
+.danger{background:#6f263d}.success{background:#147b69}
 header{position:sticky;top:0;z-index:5;background:#0b1020dd;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.nav{max-width:1120px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px}.logo{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#8b7cff,#35d6b0);font-size:20px}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:1px}
-.navright{display:flex;align-items:center;gap:8px}.nav select{max-width:155px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px}
-main{max-width:1120px;margin:32px auto;padding:0 20px 60px}.hero{padding:36px;border:1px solid #ffffff18;border-radius:28px;background:linear-gradient(120deg,#1c2850ee,#182b3bee);box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"✦";position:absolute;right:7%;top:4%;font-size:150px;color:#ffffff0c}.eyebrow{color:var(--accent2);font-weight:800;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:10px 0}.hero p{color:var(--muted);max-width:590px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat,.card,.quizbox{background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:18px}.stat strong{display:block;font-size:25px}.stat span,.muted{color:var(--muted);font-size:13px}
-.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 14px}.sectionhead h2{margin:0;font-size:22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.category{min-height:115px;text-align:left;background:var(--panel);border:1px solid var(--line);box-shadow:none;padding:18px}.category .emoji{font-size:27px;display:block;margin-bottom:8px}.category small{display:block;color:var(--muted);font-weight:500}
-.controls{display:flex;gap:9px;flex-wrap:wrap}.controls select,.controls input,.field{background:#0d1528;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:10px}
-.hidden{display:none!important}.quizbox{max-width:760px;margin:20px auto;padding:24px}.quiztop{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px}.bar{height:8px;background:#263451;border-radius:9px;margin:14px 0 22px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}
-.question{font-size:clamp(20px,3vw,27px);font-weight:800;margin:20px 0}.answers{display:grid;gap:10px}.answer{background:#182541;border:1px solid #344565;text-align:left;box-shadow:none;padding:14px}.answer.selected{border-color:var(--accent);background:#29294f}.answer.correct{border-color:var(--accent2);background:#123c3a}.answer.wrong{border-color:var(--danger);background:#492437}.quizfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
-.result{text-align:center;padding:20px}.score{font-size:54px;font-weight:900;color:var(--accent2)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formgrid>*{width:100%}textarea.field{min-height:85px;resize:vertical}
+.nav{max-width:1120px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px}
+.logo{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#8b7cff,#35d6b0);font-size:20px}
+.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:1px}
+.navright{display:flex;align-items:center;gap:8px}
+.nav select{max-width:155px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px}
+main{max-width:1120px;margin:32px auto;padding:0 20px 60px}
+.hero{padding:36px;border:1px solid #ffffff18;border-radius:28px;background:linear-gradient(120deg,#1c2850ee,#182b3bee);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"✦";position:absolute;right:7%;top:4%;font-size:150px;color:#ffffff0c}
+.eyebrow{color:var(--accent2);font-weight:800;letter-spacing:2px;font-size:12px}
+.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:10px 0}
+.hero p{color:var(--muted);max-width:590px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.stat,.card,.quizbox{background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:18px}
+.stat strong{display:block;font-size:25px}
+.stat span,.muted{color:var(--muted);font-size:13px}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 14px}
+.sectionhead h2{margin:0;font-size:22px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.category{min-height:115px;text-align:left;background:var(--panel);border:1px solid var(--line);box-shadow:none;padding:18px}
+.category .emoji{font-size:27px;display:block;margin-bottom:8px}
+.category small{display:block;color:var(--muted);font-weight:500}
+.controls{display:flex;gap:9px;flex-wrap:wrap}
+.controls select,.controls input,.field{background:#0d1528;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:10px}
+.hidden{display:none!important}
+.quizbox{max-width:760px;margin:20px auto;padding:24px}
+.quiztop{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px}
+.bar{height:8px;background:#263451;border-radius:9px;margin:14px 0 22px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}
+.question{font-size:clamp(20px,3vw,27px);font-weight:800;margin:20px 0}
+.answers{display:grid;gap:10px}
+.answer{background:#182541;border:1px solid #344565;text-align:left;box-shadow:none;padding:14px}
+.answer.selected{border-color:var(--accent);background:#29294f}
+.answer.correct{border-color:var(--accent2);background:#123c3a}
+.answer.wrong{border-color:var(--danger);background:#492437}
+.quizfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px}
+.result{text-align:center;padding:20px}
+.score{font-size:54px;font-weight:900;color:var(--accent2)}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.formgrid>*{width:100%}
+textarea.field{min-height:85px;resize:vertical}
 footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid var(--line);font-size:13px}
 .notice{background:#382f1b;border:1px solid #74602b;color:#f8dda0;border-radius:12px;padding:12px;font-size:13px;margin-top:14px}
+.ad-container{width:300px;max-width:100%;min-height:250px;margin:22px auto;text-align:center;overflow:hidden}
 .light{--bg:#f2f5fc;--panel:#fff;--panel2:#edf1fa;--text:#17213a;--muted:#5d6982;--line:#dce3f0;--shadow:0 18px 50px #25365b18;background:radial-gradient(circle at 15% 0%,#dce4ff 0,transparent 34%),var(--bg)}
-.light header{background:#f5f7fbe8}.light .hero{background:linear-gradient(120deg,#e3e8ff,#dff8f2);color:#17213a}.light .hero p{color:#5d6982}.light .controls select,.light .controls input,.light .field{background:#fff;color:#17213a}.light .answer{background:#f4f6fc;color:#17213a;border-color:#dce3f0}.light .answer.selected{background:#e8e6ff}.light .answer.correct{background:#dcf8ef}.light .answer.wrong{background:#ffe6ec}
+.light header{background:#f5f7fbe8}
+.light .hero{background:linear-gradient(120deg,#e3e8ff,#dff8f2);color:#17213a}
+.light .hero p{color:#5d6982}
+.light .controls select,.light .controls input,.light .field{background:#fff;color:#17213a}
+.light .answer{background:#f4f6fc;color:#17213a;border-color:#dce3f0}
+.light .answer.selected{background:#e8e6ff}
+.light .answer.correct{background:#dcf8ef}
+.light .answer.wrong{background:#ffe6ec}
 @media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(3,1fr)}.hero{padding:25px}.nav{padding:11px 14px}.brand small{display:none}.navright .label{display:none}}
 @media(max-width:480px){main{padding:0 13px 40px;margin-top:18px}.grid{grid-template-columns:1fr 1fr;gap:9px}.category{padding:13px;min-height:105px}.stats{gap:7px}.stat{padding:12px}.stat strong{font-size:20px}.navright{gap:5px}.nav select{max-width:118px}.quizbox{padding:16px}.formgrid{grid-template-columns:1fr}}
 </style>
-  <meta name="monetag" content="1dec5b4c2793316c3343a8d9550c75f1">
 </head>
 <body>
-<header><div class="nav">
+<header>
+<div class="nav">
   <div class="brand"><div class="logo">✦</div><div>YOUR QUIZ<small>LEARN • PLAY • WIN</small></div></div>
   <div class="navright">
     <select id="language" aria-label="Choose language">
@@ -38,7 +86,9 @@ footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid va
     </select>
     <button class="ghost" id="themeBtn" title="Toggle theme">☼</button>
   </div>
-</div></header>
+</div>
+</header>
+
 <main>
 <section id="home">
   <div class="hero">
@@ -48,6 +98,21 @@ footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid va
     <div class="actions"><button id="surpriseBtn">🎲 Surprise me</button><button class="secondary" id="dailyBtn">🔥 Daily challenge</button><button class="ghost" id="showAdminBtn">＋ Add questions</button></div>
     <div class="notice">Standalone single-file edition: questions and scores are saved only in this browser. A shared global leaderboard, online accounts and cross-device question database need a backend.</div>
   </div>
+
+  <!-- Adsterra Banner 300x250 -->
+  <div class="ad-container">
+    <script>
+      atOptions = {
+        'key': '73cd2fbb2da1efc49228d8ca722055da',
+        'format': 'iframe',
+        'height': 250,
+        'width': 300,
+        'params': {}
+      };
+    </script>
+    <script src="https://brijmohan.org/22/73cd2fbb2da1efc49228d8ca722055da"></script>
+  </div>
+
   <div class="stats">
     <div class="stat"><strong id="statQuestions">0</strong><span>Available questions</span></div>
     <div class="stat"><strong id="statPlayed">0</strong><span>Quizzes played</span></div>
@@ -67,6 +132,7 @@ footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid va
   <div class="sectionhead"><h2>Local leaderboard</h2><span class="muted">This device only</span></div>
   <div class="card" id="leaderboard"></div>
 </section>
+
 <section id="quiz" class="hidden">
   <div class="quizbox">
     <div class="quiztop"><span id="qCounter">Question 1</span><span id="timer">Practice mode</span></div>
@@ -78,6 +144,7 @@ footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid va
     <div class="quizfoot"><button class="ghost" id="quitBtn">✕ Exit</button><button id="nextBtn" disabled>Next question →</button></div>
   </div>
 </section>
+
 <section id="results" class="hidden">
   <div class="quizbox result">
     <div class="eyebrow">QUIZ COMPLETED</div><h2 id="resultTitle">Great effort!</h2>
@@ -86,6 +153,7 @@ footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid va
     <div class="sectionhead"><h2>Answer review</h2></div><div id="review" style="text-align:left"></div>
   </div>
 </section>
+
 <section id="admin" class="hidden">
   <div class="card">
     <div class="sectionhead"><h2>Add a question</h2><button class="ghost" id="closeAdmin">Close</button></div>
@@ -105,7 +173,9 @@ footer{text-align:center;color:var(--muted);padding:24px;border-top:1px solid va
   </div>
 </section>
 </main>
+
 <footer>YOUR QUIZ · Learn • Play • Win · Single HTML edition</footer>
+
 <script>
 const LANGS=['en','ml','hi','ta','te','kn','bn','mr','gu','pa','ur','ar','fr','es','de','pt','ru','zh','ja','ko'];
 const categories=[['🌍','General Knowledge'],['🔬','Science'],['➗','Mathematics'],['🏛️','History'],['🗺️','Geography'],['💻','Computer'],['⚽','Sports'],['📚','Literature'],['🧠','Logical Reasoning']];
@@ -145,7 +215,7 @@ const mlQ={
 };
 let questions=JSON.parse(localStorage.getItem('yq_questions')||'null')||seed;
 let history=JSON.parse(localStorage.getItem('yq_history')||'[]');
-let lang=localStorage.getItem('yq_lang')||'en', current=[],idx=0,chosen=null,score=0,seconds=15,tick=null,lastConfig={category:'all',count:10,difficulty:'all',mode:'practice'};
+let lang=localStorage.getItem('yq_lang')||'en',current=[],idx=0,chosen=null,score=0,seconds=15,tick=null,lastConfig={category:'all',count:10,difficulty:'all',mode:'practice'};
 const $=id=>document.getElementById(id);
 function save(){localStorage.setItem('yq_questions',JSON.stringify(questions));localStorage.setItem('yq_history',JSON.stringify(history))}
 function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
@@ -200,7 +270,6 @@ $('saveQuestion').onclick=()=>{
  let c=$('newCategory').value.trim(),q=$('newQuestion').value.trim(),opts=[$('newAnswer').value.trim(),$('opt2').value.trim(),$('opt3').value.trim(),$('opt4').value.trim()];
  if(!c||!q||opts.some(x=>!x)){ $('adminMsg').textContent='Please fill in category, question and all four options.';return}
  let a=opts.shift();questions.push({c,d:$('newDifficulty').value,q,o:[a,...opts],a:0,e:$('newExplanation').value.trim()});
- // Keep the correct answer at index 0 in storage; it will be randomized visually by shuffling answer objects in a future version.
  save();$('adminMsg').textContent='Question saved on this device. Note: correct answer is stored as the first option.';['newCategory','newQuestion','newAnswer','opt2','opt3','opt4','newExplanation'].forEach(id=>$(id).value='');renderHome();
 };
 $('exportBtn').onclick=()=>download('your-quiz-questions.json',JSON.stringify(questions,null,2));
@@ -211,5 +280,8 @@ if(localStorage.getItem('yq_light')==='true')document.body.classList.add('light'
 $('language').value=lang;$('language').onchange=e=>{lang=e.target.value;localStorage.setItem('yq_lang',lang);document.documentElement.lang=lang;document.documentElement.dir=['ar','ur'].includes(lang)?'rtl':'ltr';};
 renderHome();
 </script>
+
+<!-- Existing Adsterra Popunder code -->
+<script data-cfasync="false" src="https://ahuramazda.org/1/904b6eac9d05701c5df5ce2a95513dda"></script>
 </body>
 </html>
